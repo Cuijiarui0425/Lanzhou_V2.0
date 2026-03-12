@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Lanzhou_v1._0</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <!-- Automation.BDaq.dll is PE32 (x86). Force x86 build to avoid BadImageFormatException. -->
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="config\pointmap_mvp.csv" />
+    <None Remove="config\servo_alarm_map.csv" />
+    <None Remove="config\plc_error_code_map.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="config\pointmap_mvp.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\servo_alarm_map.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\plc_error_code_map.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Automation.BDaq">
+      <HintPath>Lib\Automation.BDaq.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+
+    <!-- eBUS (camera) core SDK: vendor drop-in reference -->
+    <Reference Include="PvDotNet">
+      <HintPath>Lib\PvDotNet.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Lib\Automation.BDaq.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\PvDotNet.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
